@@ -1,0 +1,338 @@
+{
+  "Action": [
+    {
+      "title": "Mad Max: Fury Road",
+      "year": 2015,
+      "director": "George Miller",
+      "cast": ["Tom Hardy", "Charlize Theron"],
+      "description": "In a post-apocalyptic wasteland, Max teams up with a rebel warrior to escape a tyrannical warlord.",
+      "rating": 8.1,
+      "duration_min": 120,
+      "language": "English"
+    },
+    {
+      "title": "John Wick",
+      "year": 2014,
+      "director": "Chad Stahelski",
+      "cast": ["Keanu Reeves", "Michael Nyqvist"],
+      "description": "A retired hitman seeks vengeance after his dog is killed and his car is stolen by a gangster's son.",
+      "rating": 7.4,
+      "duration_min": 101,
+      "language": "English"
+    },
+    {
+      "title": "Die Hard",
+      "year": 1988,
+      "director": "John McTiernan",
+      "cast": ["Bruce Willis", "Alan Rickman"],
+      "description": "An NYPD officer battles a group of terrorists who have taken over a Los Angeles skyscraper.",
+      "rating": 8.2,
+      "duration_min": 132,
+      "language": "English"
+    },
+    {
+      "title": "The Dark Knight",
+      "year": 2008,
+      "director": "Christopher Nolan",
+      "cast": ["Christian Bale", "Heath Ledger"],
+      "description": "Batman faces off against the Joker, a criminal mastermind who plunges Gotham into chaos.",
+      "rating": 9.0,
+      "duration_min": 152,
+      "language": "English"
+    }
+  ],
+
+  "Drama": [
+    {
+      "title": "The Shawshank Redemption",
+      "year": 1994,
+      "director": "Frank Darabont",
+      "cast": ["Tim Robbins", "Morgan Freeman"],
+      "description": "Two imprisoned men bond over years, finding solace and redemption through acts of common decency.",
+      "rating": 9.3,
+      "duration_min": 142,
+      "language": "English"
+    },
+    {
+      "title": "Forrest Gump",
+      "year": 1994,
+      "director": "Robert Zemeckis",
+      "cast": ["Tom Hanks", "Robin Wright"],
+      "description": "The life journey of a kind-hearted man from Alabama who unwittingly influences major historical events.",
+      "rating": 8.8,
+      "duration_min": 142,
+      "language": "English"
+    },
+    {
+      "title": "Parasite",
+      "year": 2019,
+      "director": "Bong Joon-ho",
+      "cast": ["Song Kang-ho", "Lee Sun-kyun"],
+      "description": "A poor family schemes to infiltrate a wealthy household, leading to shocking and unexpected consequences.",
+      "rating": 8.5,
+      "duration_min": 132,
+      "language": "Korean"
+    },
+    {
+      "title": "Schindler's List",
+      "year": 1993,
+      "director": "Steven Spielberg",
+      "cast": ["Liam Neeson", "Ben Kingsley"],
+      "description": "A German businessman saves the lives of over a thousand Jewish refugees during the Holocaust.",
+      "rating": 9.0,
+      "duration_min": 195,
+      "language": "English"
+    }
+  ],
+
+  "Comedy": [
+    {
+      "title": "The Grand Budapest Hotel",
+      "year": 2014,
+      "director": "Wes Anderson",
+      "cast": ["Ralph Fiennes", "Tony Revolori"],
+      "description": "A legendary hotel concierge and his trusted lobby boy navigate theft, murder, and war in 1930s Europe.",
+      "rating": 8.1,
+      "duration_min": 99,
+      "language": "English"
+    },
+    {
+      "title": "Superbad",
+      "year": 2007,
+      "director": "Greg Mottola",
+      "cast": ["Jonah Hill", "Michael Cera"],
+      "description": "Two inseparable best friends attempt to buy alcohol for a party, leading to chaotic misadventures.",
+      "rating": 7.6,
+      "duration_min": 113,
+      "language": "English"
+    },
+    {
+      "title": "Groundhog Day",
+      "year": 1993,
+      "director": "Harold Ramis",
+      "cast": ["Bill Murray", "Andie MacDowell"],
+      "description": "A cynical TV weatherman finds himself reliving the same day over and over in a small Pennsylvania town.",
+      "rating": 8.0,
+      "duration_min": 101,
+      "language": "English"
+    }
+  ],
+
+  "Sci-Fi": [
+    {
+      "title": "Inception",
+      "year": 2010,
+      "director": "Christopher Nolan",
+      "cast": ["Leonardo DiCaprio", "Joseph Gordon-Levitt"],
+      "description": "A thief who enters people's dreams is given the inverse task of planting an idea into a target's subconscious.",
+      "rating": 8.8,
+      "duration_min": 148,
+      "language": "English"
+    },
+    {
+      "title": "Interstellar",
+      "year": 2014,
+      "director": "Christopher Nolan",
+      "cast": ["Matthew McConaughey", "Anne Hathaway"],
+      "description": "A team of explorers travel through a wormhole in search of a new home for humanity.",
+      "rating": 8.7,
+      "duration_min": 169,
+      "language": "English"
+    },
+    {
+      "title": "The Matrix",
+      "year": 1999,
+      "director": "Lana Wachowski",
+      "cast": ["Keanu Reeves", "Laurence Fishburne"],
+      "description": "A computer hacker discovers reality is a simulation and joins rebels fighting against machine overlords.",
+      "rating": 8.7,
+      "duration_min": 136,
+      "language": "English"
+    },
+    {
+      "title": "Arrival",
+      "year": 2016,
+      "director": "Denis Villeneuve",
+      "cast": ["Amy Adams", "Jeremy Renner"],
+      "description": "A linguist is enlisted by the military to communicate with alien lifeforms that have landed on Earth.",
+      "rating": 7.9,
+      "duration_min": 116,
+      "language": "English"
+    },
+    {
+      "title": "Ex Machina",
+      "year": 2014,
+      "director": "Alex Garland",
+      "cast": ["Alicia Vikander", "Oscar Isaac"],
+      "description": "A programmer participates in an experiment with a humanoid AI, raising questions about consciousness.",
+      "rating": 7.7,
+      "duration_min": 108,
+      "language": "English"
+    }
+  ],
+
+  "Horror": [
+    {
+      "title": "Get Out",
+      "year": 2017,
+      "director": "Jordan Peele",
+      "cast": ["Daniel Kaluuya", "Allison Williams"],
+      "description": "A Black man meets his white girlfriend's parents for a weekend, uncovering a disturbing secret.",
+      "rating": 7.7,
+      "duration_min": 104,
+      "language": "English"
+    },
+    {
+      "title": "Hereditary",
+      "year": 2018,
+      "director": "Ari Aster",
+      "cast": ["Toni Collette", "Gabriel Byrne"],
+      "description": "A grieving family is haunted by sinister forces after the death of their secretive grandmother.",
+      "rating": 7.3,
+      "duration_min": 127,
+      "language": "English"
+    },
+    {
+      "title": "The Shining",
+      "year": 1980,
+      "director": "Stanley Kubrick",
+      "cast": ["Jack Nicholson", "Shelley Duvall"],
+      "description": "A writer becomes the winter caretaker of an isolated hotel and descends into madness.",
+      "rating": 8.4,
+      "duration_min": 146,
+      "language": "English"
+    }
+  ],
+
+  "Romance": [
+    {
+      "title": "Before Sunrise",
+      "year": 1995,
+      "director": "Richard Linklater",
+      "cast": ["Ethan Hawke", "Julie Delpy"],
+      "description": "An American man and French woman meet on a train and spend one magical night in Vienna together.",
+      "rating": 8.1,
+      "duration_min": 101,
+      "language": "English"
+    },
+    {
+      "title": "La La Land",
+      "year": 2016,
+      "director": "Damien Chazelle",
+      "cast": ["Ryan Gosling", "Emma Stone"],
+      "description": "An aspiring actress and a jazz musician fall in love while chasing their dreams in Los Angeles.",
+      "rating": 8.0,
+      "duration_min": 128,
+      "language": "English"
+    },
+    {
+      "title": "Pride and Prejudice",
+      "year": 2005,
+      "director": "Joe Wright",
+      "cast": ["Keira Knightley", "Matthew Macfadyen"],
+      "description": "Sparks fly between Elizabeth Bennet and the wealthy but arrogant Mr. Darcy in 19th century England.",
+      "rating": 7.8,
+      "duration_min": 129,
+      "language": "English"
+    }
+  ],
+
+  "Thriller": [
+    {
+      "title": "Gone Girl",
+      "year": 2014,
+      "director": "David Fincher",
+      "cast": ["Ben Affleck", "Rosamund Pike"],
+      "description": "A man becomes the prime suspect in the disappearance of his wife on their fifth anniversary.",
+      "rating": 8.1,
+      "duration_min": 149,
+      "language": "English"
+    },
+    {
+      "title": "Prisoners",
+      "year": 2013,
+      "director": "Denis Villeneuve",
+      "cast": ["Hugh Jackman", "Jake Gyllenhaal"],
+      "description": "A father takes justice into his own hands when his daughter goes missing and the police suspect is released.",
+      "rating": 8.1,
+      "duration_min": 153,
+      "language": "English"
+    },
+    {
+      "title": "Se7en",
+      "year": 1995,
+      "director": "David Fincher",
+      "cast": ["Brad Pitt", "Morgan Freeman"],
+      "description": "Two detectives hunt a serial killer who uses the seven deadly sins as the motives for his murders.",
+      "rating": 8.6,
+      "duration_min": 127,
+      "language": "English"
+    }
+  ],
+
+  "Animation": [
+    {
+      "title": "Spirited Away",
+      "year": 2001,
+      "director": "Hayao Miyazaki",
+      "cast": ["Daveigh Chase", "Suzanne Pleshette"],
+      "description": "A young girl wanders into a mysterious spirit world and must find a way to free herself and her parents.",
+      "rating": 8.6,
+      "duration_min": 125,
+      "language": "Japanese"
+    },
+    {
+      "title": "Spider-Man: Into the Spider-Verse",
+      "year": 2018,
+      "director": "Bob Persichetti",
+      "cast": ["Shameik Moore", "Hailee Steinfeld"],
+      "description": "Miles Morales becomes Spider-Man and crosses paths with versions of the hero from alternate dimensions.",
+      "rating": 8.4,
+      "duration_min": 117,
+      "language": "English"
+    },
+    {
+      "title": "Wall-E",
+      "year": 2008,
+      "director": "Andrew Stanton",
+      "cast": ["Ben Burtt", "Elissa Knight"],
+      "description": "A small waste-collecting robot falls in love and follows his companion into outer space.",
+      "rating": 8.4,
+      "duration_min": 98,
+      "language": "English"
+    }
+  ],
+
+  "Documentary": [
+    {
+      "title": "Free Solo",
+      "year": 2018,
+      "director": "Jimmy Chin",
+      "cast": ["Alex Honnold"],
+      "description": "Rock climber Alex Honnold attempts to free solo climb El Capitan in Yosemite without ropes.",
+      "rating": 8.2,
+      "duration_min": 100,
+      "language": "English"
+    },
+    {
+      "title": "13th",
+      "year": 2016,
+      "director": "Ava DuVernay",
+      "cast": [],
+      "description": "An exploration of the intersection of race, justice, and mass incarceration in the United States.",
+      "rating": 8.2,
+      "duration_min": 100,
+      "language": "English"
+    },
+    {
+      "title": "Won't You Be My Neighbor?",
+      "year": 2018,
+      "director": "Morgan Neville",
+      "cast": ["Fred Rogers"],
+      "description": "A look at the life and work of Fred Rogers, the beloved host of Mister Rogers' Neighborhood.",
+      "rating": 8.4,
+      "duration_min": 94,
+      "language": "English"
+    }
+  ]
+}
