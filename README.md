@@ -188,4 +188,4 @@ This project is licensed under the MIT License.
 
 👩‍💻 Author
 
-Developed by Amira Mohamed 🚀
+Developed by Mayada Mohamed 🚀
