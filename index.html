@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎬 Movie RAG Chatbot</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html,body { height:100%; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: radial-gradient(1200px 600px at 80% -10%, #1f2a44 0%, transparent 60%),
+                radial-gradient(900px 500px at -10% 110%, #2a1f44 0%, transparent 55%),
+                #0d1117;
+    color:#e8e8ea; display:flex; flex-direction:column; align-items:center;
+    min-height:100vh; padding:0 12px;
+  }
+  .wrap { width:100%; max-width:780px; display:flex; flex-direction:column; height:100vh; }
+  header { padding:20px 4px 14px; text-align:center; }
+  .logo-row { display:flex; align-items:center; justify-content:center; gap:12px; }
+  .logo { font-size:34px; filter:drop-shadow(0 0 12px rgba(245,197,24,.45)); }
+  h1 { font-size:24px; letter-spacing:.4px; }
+  h1 span { color:#f5c518; }
+  .sub { margin-top:6px; font-size:12.5px; color:#9aa3b2; }
+  .sub b { color:#c8d0dc; font-weight:600; }
+  .pill {
+    display:inline-flex; align-items:center; gap:7px; margin-top:12px;
+    padding:5px 14px; border-radius:999px; font-size:12px; font-weight:600;
+    background:#1b2230; border:1px solid #2a3345; color:#9aa3b2;
+  }
+  .pill .dot { width:8px; height:8px; border-radius:50%; background:#f0b429; animation:pulse 1.2s infinite; }
+  .pill.ready .dot { background:#34d399; animation:none; }
+  .pill.degraded .dot { background:#f87171; animation:none; }
+  .pill.error .dot { background:#ef4444; animation:none; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.25} }
+
+  #chat {
+    flex:1; overflow-y:auto; padding:16px 6px 8px; border-radius:16px;
+    background:rgba(22,27,38,.55); border:1px solid #232c3d;
+    box-shadow:0 10px 40px rgba(0,0,0,.35);
+  }
+  #chat::-webkit-scrollbar { width:8px; }
+  #chat::-webkit-scrollbar-thumb { background:#2a3345; border-radius:8px; }
+  .msg { margin:10px 4px; display:flex; }
+  .msg.user { justify-content:flex-end; }
+  .bubble {
+    max-width:82%; padding:11px 15px; border-radius:16px; line-height:1.55;
+    font-size:14px; white-space:normal; word-wrap:break-word;
+  }
+  .msg.user .bubble {
+    background:linear-gradient(135deg,#f5c518,#f0a819); color:#1a1400;
+    border-bottom-right-radius:5px; font-weight:500;
+  }
+  .msg.bot .bubble {
+    background:#1b2230; border:1px solid #2a3345; color:#e8e8ea;
+    border-bottom-left-radius:5px;
+  }
+  .msg.bot .bubble b { color:#f5c518; }
+  .meta-tag { display:block; font-size:10.5px; color:#8a93a5; margin-bottom:4px; letter-spacing:.6px; text-transform:uppercase; }
+  .src-row { margin:8px 18px 2px 6px; display:flex; flex-wrap:wrap; gap:6px; }
+  .src {
+    font-size:11px; padding:3px 9px; border-radius:999px;
+    background:#141a26; border:1px solid #2a3345; color:#aeb8c8;
+  }
+  .src b { color:#f5c518; font-weight:600; }
+  .typing { display:inline-flex; gap:5px; padding:6px 2px; }
+  .typing i { width:7px; height:7px; border-radius:50%; background:#f5c518; animation:blink 1.2s infinite; }
+  .typing i:nth-child(2){ animation-delay:.2s } .typing i:nth-child(3){ animation-delay:.4s }
+  @keyframes blink { 0%,100%{opacity:.2} 50%{opacity:1} }
+
+  .chips { display:flex; flex-wrap:wrap; gap:7px; padding:12px 2px 6px; }
+  .chip {
+    font-size:12px; padding:7px 13px; border-radius:999px; cursor:pointer;
+    background:#1b2230; border:1px solid #2a3345; color:#c8d0dc; transition:all .15s;
+  }
+  .chip:hover { border-color:#f5c518; color:#f5c518; transform:translateY(-1px); }
+
+  .inputbar { display:flex; gap:9px; padding:10px 2px 18px; }
+  #inp {
+    flex:1; padding:13px 16px; border-radius:14px; font-size:14px;
+    background:#161b26; border:1px solid #2a3345; color:#e8e8ea; outline:none;
+  }
+  #inp:focus { border-color:#f5c518; }
+  #inp:disabled { opacity:.55; }
+  #send {
+    padding:13px 22px; border-radius:14px; border:none; cursor:pointer;
+    background:linear-gradient(135deg,#f5c518,#f0a819); color:#1a1400;
+    font-weight:700; font-size:14px; transition:filter .15s;
+  }
+  #send:hover { filter:brightness(1.08); }
+  #send:disabled { opacity:.5; cursor:not-allowed; }
+  footer { padding:0 4px 14px; text-align:center; font-size:11px; color:#6b7383; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo-row"><div class="logo">🎬</div><h1>Movie <span>RAG</span> Chatbot</h1></div>
+    <div class="sub">LangChain · <b>ChromaDB</b> · MiniLM embeddings · <b>Qwen2.5-0.5B</b> LLM</div>
+    <div class="pill" id="pill"><span class="dot"></span><span id="pillText">Loading models…</span></div>
+  </header>
+
+  <div id="chat"></div>
+
+  <div class="chips" id="chips">
+    <div class="chip">What sci-fi movies do you have?</div>
+    <div class="chip">Recommend a psychological thriller with a twist ending</div>
+    <div class="chip">Tell me about Inception</div>
+    <div class="chip">Who directed The Shawshank Redemption?</div>
+    <div class="chip">What are the highest rated drama movies?</div>
+  </div>
+
+  <div class="inputbar">
+    <input id="inp" type="text" placeholder="Loading models… ask me anything about the movie catalog"
+           disabled autocomplete="off">
+    <button id="send" disabled>Send</button>
+  </div>
+  <footer>Answers are grounded ONLY in the retrieved catalog docs (k=15 similarity search) — sources are shown under each reply.</footer>
+</div>
+
+<script>
+const chatEl = document.getElementById('chat');
+const inp = document.getElementById('inp');
+const sendBtn = document.getElementById('send');
+const pill = document.getElementById('pill');
+const pillText = document.getElementById('pillText');
+const chips = document.getElementById('chips');
+let busy = false;
+
+function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function fmt(text){
+  const lines = esc(text).split('\n');
+  let out = '', inList = false;
+  for (let raw of lines){
+    const t = raw.trim();
+    const bullet = /^([-*•])\s+/.test(t);
+    if (bullet){
+      if (!inList){ out += '<ul style="margin:6px 0 6px 18px">'; inList = true; }
+      out += '<li style="margin:3px 0">' + t.replace(/^([-*•])\s+/,'') + '</li>';
+    } else {
+      if (inList){ out += '</ul>'; inList = false; }
+      out += t === '' ? '<div style="height:7px"></div>' : '<div>' + t + '</div>';
+    }
+  }
+  if (inList) out += '</ul>';
+  return out.replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
+}
+
+function addMsg(cls, html, tag){
+  const m = document.createElement('div');
+  m.className = 'msg ' + cls;
+  m.innerHTML = (tag ? '<div class="bubble"><span class="meta-tag">'+tag+'</span>'+html+'</div>'
+                     : '<div class="bubble">'+html+'</div>');
+  chatEl.appendChild(m);
+  chatEl.scrollTop = chatEl.scrollHeight;
+  return m;
+}
+
+function addSources(sources){
+  if (!sources || !sources.length) return;
+  const row = document.createElement('div');
+  row.className = 'src-row';
+  row.innerHTML = sources.map(s =>
+    '<span class="src"><b>⭐ ' + esc(String(s.rating)) + '</b>&nbsp; ' +
+    esc(s.title) + ' (' + esc(String(s.year)) + ') · ' + esc(s.genre) + '</span>').join('');
+  chatEl.appendChild(row);
+  chatEl.scrollTop = chatEl.scrollHeight;
+}
+
+async function pollStatus(){
+  try {
+    const r = await fetch('/api/status');
+    const s = await r.json();
+    if (s.status === 'ready' || s.status === 'degraded'){
+      pill.className = 'pill ' + (s.status === 'ready' ? 'ready' : 'degraded');
+      pillText.textContent = s.message;
+      inp.disabled = false; sendBtn.disabled = false;
+      inp.placeholder = 'Ask about movies… e.g. "recommend a psychological thriller"';
+      inp.focus();
+      return;
+    }
+    pillText.textContent = s.message;
+    setTimeout(pollStatus, 1200);
+  } catch(e){ setTimeout(pollStatus, 2000); }
+}
+
+async function send(text){
+  const q = (text || inp.value).trim();
+  if (!q || busy) return;
+  busy = true;
+  inp.value = '';
+  inp.disabled = true; sendBtn.disabled = true;
+  chips.style.display = 'none';
+  addMsg('user', esc(q));
+  const t = addMsg('bot', '<span class="typing"><i></i><i></i><i></i></span> <span style="font-size:12px;color:#8a93a5">retrieving → generating (local CPU model, ~30–45s)</span>', 'RAG');
+  try {
+    const r = await fetch('/api/chat', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({message: q})
+    });
+    const data = await r.json();
+    if (data.error) t.querySelector('.bubble').innerHTML = '⚠️ ' + esc(data.error);
+    else {
+      t.querySelector('.bubble').innerHTML = fmt(data.answer);
+      addSources(data.sources);
+    }
+  } catch(e){
+    t.querySelector('.bubble').innerHTML = '⚠️ Connection error — is the server running?';
+  }
+  busy = false;
+  inp.disabled = false; sendBtn.disabled = false;
+  inp.focus();
+  chatEl.scrollTop = chatEl.scrollHeight;
+}
+
+sendBtn.onclick = () => send();
+inp.addEventListener('keydown', e => { if (e.key === 'Enter') send(); });
+document.querySelectorAll('.chip').forEach(c => c.onclick = () => send(c.textContent));
+
+addMsg('bot', '👋 Hi! I\'m your movie expert. I answer using <b>only</b> the movie catalog — ask me for recommendations, genres, directors, ratings or details about a specific movie.');
+pollStatus();
+</script>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a5c2d883edb29b0d',t:'MTc5NDk2MTYwOA=='};var l=window.parent.location,o;try{o=new URL(l.origin).origin}catch(e){try{o=new URL(new URL(l.href).origin).origin}catch(e){o=''}}var u='/cdn-cgi/challenge-platform/scripts/jsd/main.js?ray=a5c2d883edb29b0d',a=document.createElement('script');a.src=o?new URL(u,o).href:u;document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
